@@ -11,5 +11,10 @@ app.use(cors());
 console.log("Static files root:", path.join(__dirname, '../public', 'index.html'));
 
 app.use(express.static(path.join(__dirname, '../public')));
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
 app.use('*', (req, res) => res.sendFile(path.join(__dirname, '../public', 'index.html')));
 

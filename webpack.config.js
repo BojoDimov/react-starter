@@ -1,5 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
+const MinifyPlugin = require("babel-minify-webpack-plugin");
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: "./client/index.js",
@@ -30,5 +32,9 @@ module.exports = {
     publicPath: "http://localhost:3000/dist/",
     hotOnly: true
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [
+    new MinifyPlugin(),
+    new CompressionPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };
